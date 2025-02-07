@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { JobResponse } from "../../../../../../types/job";
 
-export const runtime = "edge";
+// export const runtime = "edge";
 export const dynamic = "force-static";
 
 const CLS = 30;
