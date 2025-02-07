@@ -1,5 +1,5 @@
 import type { JobsResponse } from "../../types/jobs";
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "https://prg-one.vercel.app";
 document.addEventListener("DOMContentLoaded", async () => {
   const jobSearchInput = document.querySelector<HTMLInputElement>(
     `[dev-target=job-search]`
