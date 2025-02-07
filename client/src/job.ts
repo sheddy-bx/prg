@@ -110,6 +110,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     jobDescription.innerHTML = job.data[0].publicDescription;
     jobCustomText2.textContent = job.data[0].customText2 ?? "";
     jobState.textContent = job.data[0].address.state ?? "";
+    console.log({ jobWorkFromHome });
     // jobWorkFromHome.innerText = job.data[0].isWorkFromHome ? "Yes" : "No";
     jobEmploymentType.textContent = job.data[0].employmentType;
     jobExternalCategoryID.innerText = job.data[0].externalCategoryID ?? "";
