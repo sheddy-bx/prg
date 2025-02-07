@@ -9,14 +9,15 @@ const CROP_TOKEN = "V9NXD";
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const jobId = (await params).id;
     const baseURL = new URL(
       `https://public-rest${CLS}.bullhornstaffing.com/rest-services/${CROP_TOKEN}/search/JobOrder`
     );
     baseURL.searchParams.set("fields", "*");
-    baseURL.searchParams.set("query", `(id:${params.id})`);
+    baseURL.searchParams.set("query", `(id:${jobId})`);
 
     const response = await fetch(baseURL.toString(), {
       headers: {
