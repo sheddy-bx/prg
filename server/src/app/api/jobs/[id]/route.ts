@@ -6,6 +6,7 @@ export const dynamic = "force-static";
 
 const CLS = 30;
 const CROP_TOKEN = "V9NXD";
+const REVALIDATE_SECONDS = 3600;
 
 export async function GET(
   request: Request,
@@ -23,7 +24,7 @@ export async function GET(
       headers: {
         Accept: "application/json",
       },
-      next: { revalidate: 3600 },
+      next: { revalidate: REVALIDATE_SECONDS },
     });
 
     if (!response.ok) {
