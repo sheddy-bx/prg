@@ -15,6 +15,7 @@ export async function GET() {
 
     baseURL.searchParams.set("query", "(isOpen:1)");
     baseURL.searchParams.set("fields", "publishedCategory(name)");
+    baseURL.searchParams.set("count", "200");
 
     const response = await fetch(baseURL.toString(), {
       headers: {
