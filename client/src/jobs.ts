@@ -36,6 +36,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   try {
     const jobs = await getAllJobs();
+    console.log({ jobs });
     globalJobs = jobs;
     jobsInit({ jobs, jobList, jobLoader, jobItemTemplate, jobsWrapper });
     searchInputInit({
