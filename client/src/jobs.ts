@@ -12,6 +12,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   const jobLoader = document.querySelector<HTMLDivElement>(
     `[dev-target=job-loader]`
   );
+  const jobsReset = document.querySelector<HTMLDivElement>(
+    `[dev-target=jobs-reset]`
+  );
   const jobsWrapper = document.querySelector<HTMLDivElement>(
     `[dev-target=jobs-wrapper]`
   );
@@ -29,6 +32,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     !jobItemTemplate ||
     !jobLoader ||
     !jobsWrapper ||
+    !jobsReset ||
     !jobList
   ) {
     return console.error("Missing elements");
@@ -53,8 +57,79 @@ document.addEventListener("DOMContentLoaded", async () => {
       jobLoader,
       jobsWrapper,
     });
+    jobsReset.addEventListener("click", () => {
+      resetFilters({
+        jobList,
+        jobLoader,
+        jobItemTemplate,
+        jobsWrapper,
+        jobSearchInput,
+        jobFilterWrappers,
+      });
+    });
+    document.addEventListener("click", (e) => {
+      if (
+        e.target instanceof Element &&
+        !e.target.closest("[dev-target-filters]")
+      ) {
+        jobFilterWrappers.forEach((filterWrapper) => {
+          const filterDropdownWrapper =
+            filterWrapper.querySelector<HTMLDivElement>(
+              `[dev-target=dd-wrapper]`
+            );
+          if (filterDropdownWrapper) {
+            filterDropdownWrapper.setAttribute("dev-hide", "true");
+          }
+        });
+      }
+    });
   } catch (error) {
     console.error("Something went wrong", error);
+  }
+
+  function resetFilters({
+    jobList,
+    jobLoader,
+    jobItemTemplate,
+    jobsWrapper,
+    jobSearchInput,
+    jobFilterWrappers,
+  }: {
+    jobList: HTMLDivElement;
+    jobLoader: HTMLDivElement;
+    jobsWrapper: HTMLDivElement;
+    jobItemTemplate: HTMLDivElement;
+    jobSearchInput: HTMLInputElement;
+    jobFilterWrappers: NodeListOf<HTMLDivElement>;
+  }) {
+    currentState = "";
+    currentCategory = "";
+    jobSearch = "";
+    jobSearchInput.value = "";
+    jobFilterWrappers.forEach((filterWrapper) => {
+      const filterDropdownInput = filterWrapper.querySelector<HTMLDivElement>(
+        `[dev-target=dd-input]`
+      );
+      if (!filterDropdownInput) {
+        return console.error("Missing filter dropdown elements");
+      }
+      filterDropdownInput.textContent = "Select one...";
+    });
+    if (globalJobs) {
+      const filteredJob = filterJobs({
+        category: currentCategory,
+        jobs: globalJobs,
+        search: jobSearch,
+        state: currentState,
+      });
+      jobsInit({
+        jobs: filteredJob,
+        jobList,
+        jobLoader,
+        jobItemTemplate,
+        jobsWrapper,
+      });
+    }
   }
 
   function searchInputInit({
@@ -198,6 +273,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     jobItemTemplate: HTMLDivElement;
     jobsWrapper: HTMLDivElement;
   }) {
+    const allFilterDropdownWrapper = document.querySelectorAll<HTMLDivElement>(
+      `[dev-target=dd-wrapper]`
+    );
     const filterDropdownContainer =
       filterDropdownWrapper.querySelector<HTMLDivElement>(
         `[dev-target=dd-container]`
@@ -213,6 +291,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.log({ filterDropdownInput });
     filterDropdownInput.addEventListener("click", () => {
       console.log("click");
+      allFilterDropdownWrapper.forEach((filterWrapper) => {
+        if (filterWrapper !== filterDropdownWrapper) {
+          filterWrapper.setAttribute("dev-hide", "true");
+        }
+      });
       if (filterDropdownWrapper.getAttribute("dev-hide") === "true") {
         filterDropdownWrapper.setAttribute("dev-hide", "false");
       } else {
@@ -249,7 +332,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
     filterDropdownContainer.appendChild(filterEmptyDropdownItem);
 
-    filterList.forEach((filter) => {
+    filterList.filter(Boolean).forEach((filter) => {
       const filterDropdownItem = filterDropdownItemTemplate.cloneNode(
         true
       ) as HTMLDivElement;
