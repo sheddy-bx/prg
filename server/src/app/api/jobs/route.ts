@@ -17,6 +17,7 @@ export async function GET() {
     baseURL.searchParams.set("query", "(isOpen:1)");
     baseURL.searchParams.set("fields", "*");
     baseURL.searchParams.set("count", "200");
+    baseURL.searchParams.set("sort", "-dateLastModified");
 
     console.log({ baseURL: baseURL.toString() });
 
