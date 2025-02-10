@@ -182,7 +182,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       data: jobs.data.filter((job) => {
         const matchesSearch =
           search === "" ||
-          job.title.toLowerCase().includes(search.toLowerCase());
+          job.title.toLowerCase().includes(search.toLowerCase()) ||
+          job.address.state?.toLowerCase().includes(search.toLowerCase()) ||
+          job.address.city?.toLowerCase().includes(search.toLowerCase()) ||
+          job.customText2?.toLowerCase().includes(search.toLowerCase());
 
         const matchesState =
           state === "" ||
@@ -397,7 +400,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
       jobLink.href = `/internal-jobs-final?id=${job.id}`;
       jobTitle.textContent = job.title;
-      jobLocation.textContent = `${job.address.city}${
+      jobLocation.textContent = `${job.address.city ?? ""}${
         job.address.state ? "/" + job.address.state : ""
       }`;
 

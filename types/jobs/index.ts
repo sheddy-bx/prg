@@ -8,6 +8,7 @@ export interface JobsResponse {
 export interface Datum {
   benefits: null;
   bonusPackage: null;
+  customText2: null | string;
   employmentType: string;
   travelRequirements: null;
   payRate: number;
@@ -35,7 +36,7 @@ export interface Datum {
 
 export interface Address {
   address1: null | string;
-  city: string;
+  city: string | null;
   state: null | string;
   zip: null | string;
   countryID: number;
