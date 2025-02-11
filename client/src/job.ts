@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.log({ jobWorkFromHome });
     // jobWorkFromHome.innerText = job.data[0].isWorkFromHome ? "Yes" : "No";
     jobEmploymentType.textContent = job.data[0].employmentType;
-    jobExternalCategoryID.innerText = job.data[0].externalCategoryID ?? "";
+    jobExternalCategoryID.innerText = job.data[0].publishedCategory.name ?? "";
     jobLoader.setAttribute("dev-hide", "true");
     jobContentWrap.setAttribute("dev-hide", "false");
   }
