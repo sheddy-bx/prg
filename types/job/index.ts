@@ -7,7 +7,7 @@ export interface JobResponse {
 
 export interface Datum {
   benefits: null;
-  externalCategoryID: null;
+  externalCategoryID: null | number;
   publicDescription: string;
   willSponsor: boolean;
   dateEnd: null;
@@ -30,6 +30,7 @@ export interface Datum {
   willRelocate: boolean;
   responseUser: ResponseUser;
   isOpen: boolean;
+  isWorkFromHome: string;
   publishedCategory: PublishedCategory;
   startDate: number;
   _score: number;
