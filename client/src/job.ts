@@ -9,6 +9,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     "[dev-target=job-name]"
   );
   const jobTitle = document.querySelector<HTMLDivElement>("[dev-target=title]");
+  const jobLastModified = document.querySelector<HTMLDivElement>(
+    "[dev-target=last-modified]"
+  );
   const jobDescription = document.querySelector<HTMLDivElement>(
     "[dev-target=description]"
   );
@@ -44,6 +47,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     !jobEmploymentType ||
     !jobLoader ||
     !jobContentWrap ||
+    !jobLastModified ||
     !jobExternalCategoryID
   ) {
     return console.error("Missing element");
@@ -65,6 +69,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         jobNameInput,
         jobState,
         jobTitle,
+        jobLastModified,
         jobWorkFromHome,
         jobLoader,
         jobContentWrap,
@@ -87,6 +92,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     jobNameInput,
     jobState,
     jobTitle,
+    jobLastModified,
     jobWorkFromHome,
     jobLoader,
     jobContentWrap,
@@ -95,6 +101,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     jobIdInput: HTMLInputElement;
     jobNameInput: HTMLInputElement;
     jobTitle: HTMLDivElement;
+    jobLastModified: HTMLDivElement;
     jobDescription: HTMLDivElement;
     jobCustomText2: HTMLDivElement;
     jobState: HTMLDivElement;
@@ -107,6 +114,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     jobIdInput.value = job.data[0].id.toString();
     jobNameInput.value = job.data[0].title;
     jobTitle.textContent = job.data[0].title;
+    jobLastModified.textContent = formatTimestamp(
+      job.data[0].dateLastPublished
+    );
     jobDescription.innerHTML = job.data[0].publicDescription;
     jobCustomText2.textContent = job.data[0].customText2 ?? "";
     jobState.textContent = job.data[0].address.state ?? "";
@@ -116,6 +126,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     jobExternalCategoryID.innerText = job.data[0].publishedCategory.name ?? "";
     jobLoader.setAttribute("dev-hide", "true");
     jobContentWrap.setAttribute("dev-hide", "false");
+  }
+
+  function formatTimestamp(timestamp: string | number): string {
+    const date = new Date(timestamp);
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
   }
 
   async function getJob(id: number) {
