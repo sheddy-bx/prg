@@ -20,7 +20,7 @@ export interface Datum {
   isPublic: number;
   id: number;
   yearsRequired: number;
-  customText2: null;
+  customText2: null | string;
   bonusPackage: null;
   employmentType: string;
   travelRequirements: null;
@@ -30,7 +30,7 @@ export interface Datum {
   willRelocate: boolean;
   responseUser: ResponseUser;
   isOpen: boolean;
-  isWorkFromHome: string;
+  isWorkFromHome: boolean;
   publishedCategory: PublishedCategory;
   startDate: number;
   _score: number;
