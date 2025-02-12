@@ -15,7 +15,11 @@ export async function GET() {
     );
 
     baseURL.searchParams.set("query", "(isOpen:1)");
-    baseURL.searchParams.set("fields", "*");
+    baseURL.searchParams.set(
+      "fields",
+      "benefits,externalCategoryID,publicDescription,willSponsor,dateEnd,salary,address(address1,city,state,zip,countryID),title,dateAdded,isDeleted,dateLastPublished,isPublic,id,yearsRequired,customText2,bonusPackage,employmentType,travelRequirements,payRate,publishedZip,salaryUnit,willRelocate,responseUser(id,firstName,lastName),isOpen,publishedCategory(id,name),startDate,_score,isWorkFromHome"
+    );
+    // baseURL.searchParams.set("fields", "*");
     baseURL.searchParams.set("count", "200");
     baseURL.searchParams.set("sort", "-dateLastModified");
 
