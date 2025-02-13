@@ -20,6 +20,7 @@ export interface Datum {
   address: Address;
   title: string;
   dateAdded: number;
+  dateLastModified: number;
   salaryUnit: string;
   willRelocate: boolean;
   responseUser: ResponseUser;

@@ -15,6 +15,7 @@ export interface Datum {
   address: Address;
   title: string;
   dateAdded: number;
+  dateLastModified: number;
   isDeleted: boolean;
   dateLastPublished: number;
   isPublic: number;
