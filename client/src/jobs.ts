@@ -1,4 +1,5 @@
 import type { JobsResponse } from "../../types/jobs";
+import { externalCategoryData } from "../defaultValues/index";
 const BASE_URL = "https://prg-one.vercel.app";
 document.addEventListener("DOMContentLoaded", async () => {
   const jobSearchInput = document.querySelector<HTMLInputElement>(
@@ -20,6 +21,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   );
   const jobList = document.querySelector<HTMLDivElement>(
     `[dev-target=job-list]`
+  );
+  const externalCategories = Object.entries(externalCategoryData).map(
+    ([key, value]) => ({ id: key, name: value })
   );
   let currentState = "";
   let currentCategory = "";
@@ -192,8 +196,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           job.address.state?.toLowerCase() === state.toLowerCase();
 
         const matchesCategory =
-          category === "" ||
-          job.publishedCategory.name.toLowerCase() === category.toLowerCase();
+          category === "" || job.externalCategoryID === parseInt(category);
 
         return matchesSearch && matchesState && matchesCategory;
       }),
@@ -242,11 +245,11 @@ document.addEventListener("DOMContentLoaded", async () => {
           jobsWrapper,
         });
       } else if (filterType === "category") {
-        const categories = await getJobCategories();
+        // const categories = await getJobCategories();
         filterInit({
           filterDropdownInput,
           filterDropdownWrapper,
-          filterList: categories,
+          filterList: externalCategories,
           filterType,
           jobItemTemplate,
           jobList,
@@ -269,7 +272,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }: {
     filterDropdownInput: HTMLDivElement;
     filterDropdownWrapper: HTMLDivElement;
-    filterList: string[];
+    filterList: string[] | { id: string; name: string }[];
     filterType: string;
     jobList: HTMLDivElement;
     jobLoader: HTMLDivElement;
@@ -339,14 +342,16 @@ document.addEventListener("DOMContentLoaded", async () => {
       const filterDropdownItem = filterDropdownItemTemplate.cloneNode(
         true
       ) as HTMLDivElement;
-      filterDropdownItem.textContent = filter;
+      const name = typeof filter === "string" ? filter : filter.name;
+      const categoryId = typeof filter === "string" ? "" : filter.id;
+      filterDropdownItem.textContent = name;
 
       filterDropdownItem.addEventListener("click", () => {
-        filterDropdownInput.textContent = filter;
+        filterDropdownInput.textContent = name;
         if (filterType === "state") {
-          currentState = filter;
+          currentState = name;
         } else if (filterType === "category") {
-          currentCategory = filter;
+          currentCategory = categoryId;
         }
         filterDropdownWrapper.setAttribute("dev-hide", "true");
         if (globalJobs) {

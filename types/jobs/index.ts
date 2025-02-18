@@ -21,6 +21,7 @@ export interface Datum {
   title: string;
   dateAdded: number;
   dateLastModified: number;
+  externalCategoryID: number | null;
   salaryUnit: string;
   willRelocate: boolean;
   responseUser: ResponseUser;
