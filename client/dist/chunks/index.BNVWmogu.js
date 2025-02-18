@@ -1,2 +1,0 @@
-const e={1:"Accounting and Finance",2:"Commercial Lines Account Manager",3:"Personal Lines Account Manager ",4:"Employee Benefits Account Manager",5:"Underwriting",6:"Commercial Casualty Claims ",7:"Complex/Specialty Claims",8:"Commercial Property Claims",9:"Personal Lines Claims",10:"Workers' Compensation Claims",11:"Corporate Legal",12:"Technology",13:"Risk Management",14:"Reinsurance",15:"Executive Search",16:"Other"};export{e};
-//# sourceMappingURL=index.BNVWmogu.js.map
