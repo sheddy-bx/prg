@@ -457,17 +457,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  async function getJobCategories() {
-    try {
-      const response = await fetch(`${BASE_URL}/api/categories`);
-      if (!response.ok) {
-        throw new Error("Failed to fetch job categories");
-      }
-      const categories: string[] = await response.json();
-      return categories;
-    } catch (error) {
-      console.error("Error fetching job categories:", error);
-      throw error;
-    }
-  }
+  // async function getJobCategories() {
+  //   try {
+  //     const response = await fetch(`${BASE_URL}/api/categories`);
+  //     if (!response.ok) {
+  //       throw new Error("Failed to fetch job categories");
+  //     }
+  //     const categories: string[] = await response.json();
+  //     return categories;
+  //   } catch (error) {
+  //     console.error("Error fetching job categories:", error);
+  //     throw error;
+  //   }
+  // }
 });
