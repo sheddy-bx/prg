@@ -6,7 +6,7 @@ export const dynamic = "force-static";
 
 const CLS = 30;
 const CROP_TOKEN = "V9NXD";
-const REVALIDATE_SECONDS = 3600;
+const REVALIDATE_SECONDS = 4 * 3600;
 
 export async function GET() {
   try {
