@@ -47,9 +47,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
       titleDiv.textContent = job.title;
       customTextDiv.textContent = job.customText2 ?? "";
-      stateDiv.textContent = job.address.state
-        ? `${job.customText2 ? "/" : ""} ${job.address.state}`
-        : "";
+      stateDiv.textContent = `${job.address.city ?? ""}${
+        job.address.state ? " / " + job.address.state : ""
+      }`;
       sliderWrap.appendChild(slide);
     });
   }
