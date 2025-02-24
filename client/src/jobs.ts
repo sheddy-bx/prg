@@ -423,8 +423,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       jobLink.href = `/internal-jobs-final?id=${job.id}`;
       jobTitle.textContent = job.title;
       jobLocation.textContent = `${job.address.city ?? ""}${
-        job.address.state ? " / " + job.address.state : ""
-      }`;
+        job.address.city && job.address.state && " / "
+      }${job.address.state ?? ""}`;
 
       jobList.appendChild(jobItem);
     });
