@@ -46,7 +46,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         return console.error("Missing element in slide");
       }
       titleDiv.textContent = job.title;
-      customTextDiv.textContent = job.customText2 ?? "";
+      if (!job.customText2) {
+        customTextDiv.remove();
+      } else {
+        customTextDiv.textContent = job.customText2;
+      }
       stateDiv.textContent = `${job.address.city ?? ""}${
         job.address.city && job.address.state ? " / " : ""
       }${job.address.state ?? ""}`;
