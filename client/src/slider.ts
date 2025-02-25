@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       titleDiv.textContent = job.title;
       customTextDiv.textContent = job.customText2 ?? "";
       stateDiv.textContent = `${job.address.city ?? ""}${
-        job.address.city && job.address.state && " / "
+        job.address.city && job.address.state ? " / " : ""
       }${job.address.state ?? ""}`;
       sliderWrap.appendChild(slide);
     });
