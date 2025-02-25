@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     jobs.data.slice(0, limit).forEach((job) => {
       const slide = slideTemplate.cloneNode(true) as HTMLLinkElement;
-      slide.href = `/internal-jobs-final?id=${job.id}`;
+      slide.href = `/internal-jobs?id=${job.id}`;
       const titleDiv = slide.querySelector(`[dev-target=title]`);
       const customTextDiv = slide.querySelector(`[dev-target=custom-text-2]`);
       const stateDiv = slide.querySelector(`[dev-target=state]`);

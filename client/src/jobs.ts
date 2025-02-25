@@ -420,7 +420,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (!jobLink || !jobTitle || !jobLocation) {
         return console.error("Missing job item elements");
       }
-      jobLink.href = `/internal-jobs-final?id=${job.id}`;
+      jobLink.href = `/internal-jobs?id=${job.id}`;
       jobTitle.textContent = job.title;
       jobLocation.textContent = `${job.address.city ?? ""}${
         job.address.city && job.address.state && " / "
