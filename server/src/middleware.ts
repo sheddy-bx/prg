@@ -6,7 +6,7 @@ const acceptedOrigins = [
   "http://localhost:3000",
   "http://localhost:5173", // Vite default port
   "https://prgrecruiting.webflow.io",
-  "www.prgir.com",
+  "https://www.prgir.com",
 ];
 
 export function middleware(request: NextRequest) {
