@@ -19,9 +19,8 @@ export async function GET(
     );
     baseURL.searchParams.set(
       "fields",
-      "benefits,externalCategoryID,publicDescription,willSponsor,dateEnd,salary,address(address1,city,state,zip,countryID),title,dateAdded,isDeleted,dateLastPublished,isPublic,id,yearsRequired,customText2,bonusPackage,employmentType,travelRequirements,payRate,publishedZip,salaryUnit,willRelocate,responseUser(id,firstName,lastName),isOpen,publishedCategory(id,name),startDate,_score,isWorkFromHome,dateLastModified"
+      "externalCategoryID,publicDescription,address(city,state),title,id,customText2,employmentType,isWorkFromHome,dateLastModified"
     );
-    // baseURL.searchParams.set("fields", "isWorkFromHome");
     baseURL.searchParams.set("query", `(id:${jobId})`);
 
     console.log({ baseURL: baseURL.toString() });
