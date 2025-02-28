@@ -26,6 +26,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   const jobNameInput = document.querySelector<HTMLInputElement>(
     "[dev-target=job-name]"
   );
+  const responseUserFirstNameInput = document.querySelector<HTMLInputElement>(
+    "[dev-target=response-user-first-name]"
+  );
+  const responseUserLastNameInput = document.querySelector<HTMLInputElement>(
+    "[dev-target=response-user-last-name]"
+  );
   const jobTitle = document.querySelector<HTMLDivElement>("[dev-target=title]");
   const jobLastModified = document.querySelector<HTMLDivElement>(
     "[dev-target=last-modified]"
@@ -57,6 +63,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (
     !jobIdInput ||
     !jobNameInput ||
+    !responseUserFirstNameInput ||
+    !responseUserLastNameInput ||
     !jobTitle ||
     !jobDescription ||
     !jobCustomText2 ||
@@ -85,6 +93,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         jobExternalCategoryID,
         jobIdInput,
         jobNameInput,
+        responseUserFirstNameInput,
+        responseUserLastNameInput,
         jobState,
         jobTitle,
         jobLastModified,
@@ -108,6 +118,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     jobExternalCategoryID,
     jobIdInput,
     jobNameInput,
+    responseUserFirstNameInput,
+    responseUserLastNameInput,
     jobState,
     jobTitle,
     jobLastModified,
@@ -118,6 +130,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     job: JobResponse;
     jobIdInput: HTMLInputElement;
     jobNameInput: HTMLInputElement;
+    responseUserFirstNameInput: HTMLInputElement;
+    responseUserLastNameInput: HTMLInputElement;
     jobTitle: HTMLDivElement;
     jobLastModified: HTMLDivElement;
     jobDescription: HTMLDivElement;
@@ -143,14 +157,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       jobExternalCategoryID.parentElement?.setAttribute("dev-hide", "true");
     jobIdInput.value = job.data[0].id.toString();
     jobNameInput.value = title;
+    responseUserFirstNameInput.value = job.data[0].responseUser.firstName;
+    responseUserLastNameInput.value = job.data[0].responseUser.lastName;
     jobTitle.textContent = title;
     jobLastModified.textContent = formatTimestamp(job.data[0].dateLastModified);
     jobDescription.innerHTML = job.data[0].publicDescription;
     jobCustomText2.textContent = customText ?? "";
     jobState.textContent = state ? `${customText ? "/" : ""} ${state}` : "";
-    jobWorkFromHome.innerText = job.data[0].isWorkFromHome
-      ? "Remote"
-      : "Onsite";
+    jobWorkFromHome.innerText = job.data[0].onSite;
     jobEmploymentType.textContent = employmentType;
     jobExternalCategoryID.innerText = category ?? "";
     jobLoader.setAttribute("dev-hide", "true");
