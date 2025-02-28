@@ -19,7 +19,7 @@ export async function GET(
     );
     baseURL.searchParams.set(
       "fields",
-      "externalCategoryID,publicDescription,address(city,state),title,id,customText2,employmentType,isWorkFromHome,dateLastModified"
+      "externalCategoryID,publicDescription,address(city,state),title,id,customText2,employmentType,isWorkFromHome,dateLastModified,onSite,responseUser(id,firstName,lastName)"
     );
     baseURL.searchParams.set("query", `(id:${jobId})`);
 
