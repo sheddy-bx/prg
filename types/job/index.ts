@@ -6,15 +6,21 @@ export interface JobResponse {
 }
 
 export interface Datum {
-  externalCategoryID: null | number;
+  id: number;
+  title: string;
+  customText2: string | null;
+  employmentType: string;
   publicDescription: string;
   address: Address;
-  title: string;
+  onSite: string;
   dateLastModified: number;
-  id: number;
-  customText2: null | string;
-  employmentType: string;
+  externalCategoryID: number | null;
   isWorkFromHome: boolean;
+  responseUser: {
+    id: number;
+    firstName: string;
+    lastName: string;
+  };
 }
 
 export interface Address {

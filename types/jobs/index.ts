@@ -6,23 +6,24 @@ export interface JobsResponse {
 }
 
 export interface Datum {
-  customText2: null | string;
+  id: number;
+  title: string;
+  customText2: string | null;
   employmentType: string;
   publicDescription: string;
   address: Address;
-  title: string;
+  onSite: string;
   dateLastModified: number;
   externalCategoryID: number | null;
-  publishedCategory: PublishedCategory;
-  id: number;
+  isWorkFromHome: boolean;
+  responseUser: {
+    id: number;
+    firstName: string;
+    lastName: string;
+  };
 }
 
 export interface Address {
   city: string | null;
   state: null | string;
-}
-
-export interface PublishedCategory {
-  id: number;
-  name: string;
 }
