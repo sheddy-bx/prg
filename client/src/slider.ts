@@ -46,13 +46,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         return console.error("Missing element in slide");
       }
       titleDiv.textContent = job.title;
-      if (!job.customText2) {
+      if (!job.address.city) {
         customTextDiv.remove();
       } else {
-        customTextDiv.textContent = job.customText2;
+        customTextDiv.textContent = job.address.city;
       }
       stateDiv.textContent = `${
-        job.customText2 && job.address.state ? " / " : ""
+        job.address.city && job.address.state ? " / " : ""
       }${job.address.state ?? ""}`;
       sliderWrap.appendChild(slide);
     });
