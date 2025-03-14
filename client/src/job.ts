@@ -107,6 +107,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       console.log({ job });
     } else {
       console.log("no job", job);
+      window.location.href = "/404";
     }
   } catch (error) {
     console.error("Something went wrong", error);

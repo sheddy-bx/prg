@@ -21,7 +21,7 @@ export async function GET(
       "fields",
       "externalCategoryID,publicDescription,address(city,state),title,id,customText2,employmentType,isWorkFromHome,dateLastModified,onSite,responseUser(id,firstName,lastName)"
     );
-    baseURL.searchParams.set("query", `(id:${jobId})`);
+    baseURL.searchParams.set("query", `(id:${jobId} AND isOpen:1)`);
 
     console.log({ baseURL: baseURL.toString() });
 
